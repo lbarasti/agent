@@ -4,6 +4,13 @@ version: 0.1.0
 authors:
   - lbarasti <lbarasti@users.noreply.github.com>
 
+description: |
+  A thread-safe wrapper for stateful objects
+
+development_dependencies:
+  immutable:
+    github: lucaong/immutable
+
 crystal: 0.34.0
 
 license: MIT

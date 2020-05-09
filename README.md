@@ -6,11 +6,11 @@ TODO: Write a description here
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     agent:
-       github: your-github-user/agent
-   ```
+```yaml
+dependencies:
+  agent:
+    github: lbarasti/agent
+```
 
 2. Run `shards install`
 
