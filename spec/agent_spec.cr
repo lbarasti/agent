@@ -27,16 +27,16 @@ describe Agent do
     counter.update { |n|
       sleep 0.5
       n + 1
-    }.should eq Agent::Result::Submitted
+    }.should be_a Agent::Submitted
 
-    counter.get(0.1.seconds).should eq Agent::Result::Timeout
+    counter.get(0.1.seconds).should be_a Agent::Timeout
   end
 
   it "raises an error on timeout, when using the `!` variant of the methods" do
     counter.update { |n|
       sleep 0.5
       n + 1
-    }.should eq Agent::Result::Submitted
+    }.should be_a Agent::Submitted
 
     expect_raises(Exception, "Timeout") {
       counter.get!(0.1.seconds)
@@ -47,7 +47,7 @@ describe Agent do
     counter.get_and_update { |n|
       raise Exception.new
       {n, n}
-    }.should eq Agent::Result::Error
+    }.should be_a Agent::Error
 
     counter.get.should eq 4
   end
@@ -67,7 +67,7 @@ describe Agent do
     counter.update { |n|
       raise Exception.new
       n + 1
-    }.should eq Agent::Result::Submitted
+    }.should be_a Agent::Submitted
     counter.get.should eq 4
   end
 end

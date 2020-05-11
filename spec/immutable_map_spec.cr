@@ -1,7 +1,7 @@
 require "./spec_helper"
 require "immutable"
 
-class ConcurrentMap(K, V) < Agent(Immutable::Map(K, V))
+class ConcurrentMap2(K, V) < Agent(Immutable::Map(K, V))
   def initialize(hash : Immutable::Map(K, V))
     super
   end
@@ -21,31 +21,31 @@ class ConcurrentMap(K, V) < Agent(Immutable::Map(K, V))
   end
 end
 
-Latency = "latency"
-describe ConcurrentMap do
+describe ConcurrentMap2 do
+  latency = "latency"
   it "works" do
-    rt = ConcurrentMap.new(Immutable::Map(String, Float64).new)
+    rt = ConcurrentMap2.new(Immutable::Map(String, Float64).new)
     rt.update { |hash|
-      hash.set(Latency, 1.2)
+      hash.set(latency, 1.2)
     }
-    rt[Latency].should eq 1.2
+    rt[latency].should eq 1.2
 
     rt.get_and_update { |hash|
-      {hash[Latency], hash.set(Latency, hash[Latency] + 0.3)}
+      {hash[latency], hash.set(latency, hash[latency] + 0.3)}
     }.should eq 1.2
 
-    rt[Latency].should eq 1.5
+    rt[latency].should eq 1.5
 
     expect_raises(Exception) {
       rt["error_rate"]
     }
-    rt["error_rate"]?.should eq Agent::Result::Error
+    rt["error_rate"]?.should be_a Agent::Error
     rt["error_rate"] = 5.1
     rt["error_rate"].should eq 5.1
   end
 
   it "is thread-safe" do
-    c = ConcurrentMap.new(Immutable::Map(String, Int32).new)
+    c = ConcurrentMap2.new(Immutable::Map(String, Int32).new)
     done = (1..10).map { |m|
       Channel(Nil).new.tap { |d|
         spawn {

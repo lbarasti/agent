@@ -1,11 +1,21 @@
 class Agent(T)
   record Wait, ack : Channel(Nil)
   record Update(T), fn : T -> T
-  enum Result
-    Timeout
-    Submitted
-    Error
+  
+  abstract struct Result; end
+  record Timeout < Result
+  record Submitted < Result
+  struct Error < Result
+    getter ex : Exception
+    def initialize(@ex : Exception)
+    end
   end
+  private class TimeoutException < Exception
+  end
+
+  TimeoutInst = Timeout.new
+  SubmittedInst = Submitted.new
+  TimeoutExceptionInst = TimeoutException.new
 
   DefaultTimeout = 5.seconds
 
@@ -43,12 +53,9 @@ class Agent(T)
   # Analogous `Agent#get`, but an exception is raised in case of timeout.
   # NOTE the compile-time type of the returned value is `T`, rather than `T | Agent::Result`.
   def get!(max_time = DefaultTimeout) : T
-    case r = get(max_time)
-    when T
-      r
-    else
-      raise Exception.new(r.to_s)
-    end
+    return_or_raise {
+      get(max_time)
+    }.as(T)
   end
 
   # Fetches the state of the Agent and applies the given function to it.
@@ -67,12 +74,9 @@ class Agent(T)
   # or if an exception is raised within the block.
   # NOTE the compile-time type of the returned value is `Q`, rather than `Q | Agent::Result`.
   def get!(max_time = DefaultTimeout, &fn : T -> Q) : Q forall Q
-    case r = get(max_time, &fn)
-    when Q
-      r
-    else
-      raise Exception.new(r.to_s)
-    end
+    return_or_raise {
+      get(max_time, &fn)
+    }.as(Q)
   end
 
   # Fetches the state of the Agent, updates it and returns the first projection of `fn.call(state)`.
@@ -91,13 +95,13 @@ class Agent(T)
       begin
         q, @state = fn.call(@state)
         q
-      rescue
-        Result::Error
+      rescue ex
+        Agent::Error.new(ex)
       ensure
         ack.send nil
       end
     when timeout max_time
-      Result::Timeout
+      TimeoutInst
     end
   end
 
@@ -107,12 +111,9 @@ class Agent(T)
   # or if an exception is raised within the block.
   # NOTE the compile-time type of the returned value is `Q`, rather than `Q | Agent::Result`.
   def get_and_update!(max_time = DefaultTimeout, &fn : T -> {Q, T}) : Q forall Q
-    case r = get_and_update(max_time, &fn)
-    when Q
-      r
-    else
-      raise Exception.new(r.to_s)
-    end
+    return_or_raise {
+      get_and_update(max_time, &fn)
+    }.as(Q)
   end
 
   # Updates the state of the Agent.
@@ -125,9 +126,22 @@ class Agent(T)
   def update(max_time = DefaultTimeout, &fn : T -> T) : Result
     select
     when @commands.send(Update.new(fn))
-      Result::Submitted
+      SubmittedInst
     when timeout max_time
-      Result::Timeout
+      TimeoutInst
+    end
+  end
+
+  private def return_or_raise(&fn : -> T) : T forall T
+    case r = fn.call
+    when T
+      r
+    when Timeout
+      raise TimeoutExceptionInst
+    when Error
+      raise r.ex
+    else
+      raise Exception.new(r.to_s)
     end
   end
 end
