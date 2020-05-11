@@ -4,6 +4,7 @@ class ConcurrentMap(K, V) < Agent(Hash(K, V))
   def initialize(hash : Hash(K, V))
     super
   end
+
   def [](k)
     get!(&.[](k))
   end
@@ -29,7 +30,7 @@ describe ConcurrentMap do
       hash
     }
     rt[Latency].should eq 1.2
-    
+
     rt.get_and_update { |hash|
       old = hash[Latency]
       hash[Latency] = 1.5

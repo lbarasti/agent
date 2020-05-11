@@ -5,6 +5,7 @@ class ConcurrentMap(K, V) < Agent(Immutable::Map(K, V))
   def initialize(hash : Immutable::Map(K, V))
     super
   end
+
   def [](k)
     get!(&.[](k))
   end
@@ -28,7 +29,7 @@ describe ConcurrentMap do
       hash.set(Latency, 1.2)
     }
     rt[Latency].should eq 1.2
-    
+
     rt.get_and_update { |hash|
       {hash[Latency], hash.set(Latency, hash[Latency] + 0.3)}
     }.should eq 1.2

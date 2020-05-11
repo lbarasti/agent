@@ -38,7 +38,7 @@ describe Agent do
       n + 1
     }.should eq Agent::Result::Submitted
 
-    expect_raises(Exception) {
+    expect_raises(Exception, "Timeout") {
       counter.get!(0.1.seconds)
     }
   end
@@ -48,6 +48,17 @@ describe Agent do
       raise Exception.new
       {n, n}
     }.should eq Agent::Result::Error
+
+    counter.get.should eq 4
+  end
+
+  it "raises an error when an exception is thrown withing the given block, when using the `!` variant of the methods" do
+    expect_raises(Exception, "Error") {
+      counter.get_and_update! { |n|
+        raise Exception.new
+        {n, n}
+      }
+    }
 
     counter.get.should eq 4
   end

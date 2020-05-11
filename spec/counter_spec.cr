@@ -4,6 +4,7 @@ class Counter(T) < Agent(T)
   def incr
     update(&.+(1))
   end
+
   def decr
     update(&.-(1))
   end
@@ -22,21 +23,18 @@ describe Counter do
   end
 
   it "is thread-safe" do
-    c = Counter.new(0)
-    done = (1..10).map { |m|
-      Channel(Nil).new.tap { |d|
-        spawn {
-          (1..2048).each {
-            sleep rand/1000
-            c.incr
-          }
-          d.send(nil)
+    done = Channel(Nil).new(10)
+    counter = Agent.new(0)
+
+    (1..10).each {
+      spawn {
+        (1..1024).each {
+          counter.update { |x| x + 1 }
         }
+        done.send nil
       }
     }
-    10.times {
-      Channel.receive_first(done)
-    }
-    c.get.should eq 2048 * 10
+    10.times { done.receive }
+    counter.get.should eq 1024 * 10
   end
 end
