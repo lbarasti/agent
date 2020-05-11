@@ -1,20 +1,24 @@
 class Agent(T)
   record Wait, ack : Channel(Nil)
   record Update(T), fn : T -> T
-  
+
   abstract struct Result; end
+
   record Timeout < Result
   record Submitted < Result
+
   struct Error < Result
     getter ex : Exception
+
     def initialize(@ex : Exception)
     end
   end
+
   private class TimeoutException < Exception
   end
 
-  TimeoutInst = Timeout.new
-  SubmittedInst = Submitted.new
+  TimeoutInst          = Timeout.new
+  SubmittedInst        = Submitted.new
   TimeoutExceptionInst = TimeoutException.new
 
   DefaultTimeout = 5.seconds

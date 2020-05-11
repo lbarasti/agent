@@ -14,8 +14,8 @@
   </symbol>
 </svg>
 
-  <meta id="repository-name" content="">
-  <title>README - </title>
+  <meta id="repository-name" content="github.com/lbarasti/agent">
+  <title>README - github.com/lbarasti/agent</title>
   <script type="text/javascript">
   CrystalDoc.base_path = "";
   </script>
@@ -40,22 +40,37 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent " data-id="/Agent" data-name="agent(t)">
+  <li class="parent " data-id="github.com/lbarasti/agent/Agent" data-name="agent(t)">
       <a href="Agent.html">Agent</a>
       
         <ul>
   
-  <li class=" " data-id="/Agent/Result" data-name="agent::result">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Error" data-name="agent::error">
+      <a href="Agent/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Result" data-name="agent::result">
       <a href="Agent/Result.html">Result</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Update" data-name="agent::update(t)">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Submitted" data-name="agent::submitted">
+      <a href="Agent/Submitted.html">Submitted</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Timeout" data-name="agent::timeout">
+      <a href="Agent/Timeout.html">Timeout</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Update" data-name="agent::update(t)">
       <a href="Agent/Update.html">Update</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Wait" data-name="agent::wait">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Wait" data-name="agent::wait">
       <a href="Agent/Wait.html">Wait</a>
       
     </li>
@@ -150,8 +165,8 @@ any transformation of the current Agent's state <em>and</em> alter the state in 
   </svg>
 </a>Error handling and timeouts</h3>
 
-<p>Errors are handled within the Agent, and surfaced as <code><a href="Agent/Result.html#Error">Agent::Result::Error</a></code> values.
-For example, if we try to fetch a value for a non existing key, the <code>KeyError</code> exception turns into an <code><a href="Agent/Result.html#Error">Agent::Result::Error</a></code>.</p>
+<p>Errors are handled within the Agent, and surfaced as <code>Agent::Result::Error</code> values.
+For example, if we try to fetch a value for a non existing key, the <code>KeyError</code> exception turns into an <code>Agent::Result::Error</code>.</p>
 
 <pre><code class="language-crystal">concurrent_hash.get { <span class="o">|</span>h<span class="o">|</span> h[<span class="s">&quot;non-existing&quot;</span>] } <span class="c"># =&gt; Agent::Result::Error</span></code></pre>
 

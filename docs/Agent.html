@@ -14,8 +14,8 @@
   </symbol>
 </svg>
 
-  <meta id="repository-name" content="">
-  <title>Agent(T) - </title>
+  <meta id="repository-name" content="github.com/lbarasti/agent">
+  <title>Agent(T) - github.com/lbarasti/agent</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "";
   </script>
@@ -40,22 +40,37 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent open current" data-id="/Agent" data-name="agent(t)">
+  <li class="parent open current" data-id="github.com/lbarasti/agent/Agent" data-name="agent(t)">
       <a href="Agent.html">Agent</a>
       
         <ul>
   
-  <li class=" " data-id="/Agent/Result" data-name="agent::result">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Error" data-name="agent::error">
+      <a href="Agent/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Result" data-name="agent::result">
       <a href="Agent/Result.html">Result</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Update" data-name="agent::update(t)">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Submitted" data-name="agent::submitted">
+      <a href="Agent/Submitted.html">Submitted</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Timeout" data-name="agent::timeout">
+      <a href="Agent/Timeout.html">Timeout</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Update" data-name="agent::update(t)">
       <a href="Agent/Update.html">Update</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Wait" data-name="agent::wait">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Wait" data-name="agent::wait">
       <a href="Agent/Wait.html">Wait</a>
       
     </li>
@@ -106,6 +121,13 @@
     Defined in:
   </h2>
   
+    
+      <a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L1" target="_blank">
+        agent.cr
+      </a>
+    
+    <br/>
+  
 
 
 
@@ -123,6 +145,21 @@
     
       <dt class="entry-const" id="DefaultTimeout">
         <strong>DefaultTimeout</strong> = <code><span class="n">5</span>.seconds</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="SubmittedInst">
+        <strong>SubmittedInst</strong> = <code><span class="t">Submitted</span>.<span class="k">new</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="TimeoutExceptionInst">
+        <strong>TimeoutExceptionInst</strong> = <code><span class="t">TimeoutException</span>.<span class="k">new</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="TimeoutInst">
+        <strong>TimeoutInst</strong> = <code><span class="t">Timeout</span>.<span class="k">new</span></code>
       </dt>
       
     
@@ -272,6 +309,8 @@ data consistency within Agent's operations.</p>
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L31" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -307,6 +346,8 @@ data consistency within Agent's operations.</p>
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L51" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -328,6 +369,8 @@ the current state.</p>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -352,6 +395,8 @@ the current state.</p>
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L59" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -375,6 +420,8 @@ or if an exception is raised within the block.</p>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -401,6 +448,8 @@ Otherwise, the transformed state <code>fn.call(state).first</code>, and the stat
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L93" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -425,6 +474,8 @@ or if an exception is raised within the block.</p>
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L117" target="_blank">View source</a>]
+        
       </div>
     </div>
   
@@ -440,8 +491,8 @@ or if an exception is raised within the block.</p>
           
           <p>Updates the state of the Agent.</p>
 
-<p>Returns <code><a href="Agent/Result.html#Submitted">Agent::Result::Submitted</a></code>, if the update operation was accepted.
-Returns <code><a href="Agent/Result.html#Timeout">Agent::Result::Timeout</a></code>, if a timeout is triggered before the operation
+<p>Returns <code>Agent::Result::Submitted</code>, if the update operation was accepted.
+Returns <code>Agent::Result::Timeout</code>, if a timeout is triggered before the operation
 is accepted by the Agent's fiber.</p>
 
 <p><span class="flag purple">NOTE</span>  <code><a href="Agent.html#update(max_time=DefaultTimeout,&fn:T-%3ET):Result-instance-method">#update</a></code> does not wait for <code>fn</code> to be applied to the Agent's state
@@ -450,6 +501,8 @@ before returning.</p>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L130" target="_blank">View source</a>]
         
       </div>
     </div>

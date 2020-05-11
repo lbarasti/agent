@@ -14,8 +14,8 @@
   </symbol>
 </svg>
 
-  <meta id="repository-name" content="">
-  <title>Agent::Result - </title>
+  <meta id="repository-name" content="github.com/lbarasti/agent">
+  <title>Agent::Result - github.com/lbarasti/agent</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -40,22 +40,37 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent open current" data-id="/Agent" data-name="agent(t)">
+  <li class="parent open current" data-id="github.com/lbarasti/agent/Agent" data-name="agent(t)">
       <a href="../Agent.html">Agent</a>
       
         <ul>
   
-  <li class=" current" data-id="/Agent/Result" data-name="agent::result">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Error" data-name="agent::error">
+      <a href="../Agent/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/lbarasti/agent/Agent/Result" data-name="agent::result">
       <a href="../Agent/Result.html">Result</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Update" data-name="agent::update(t)">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Submitted" data-name="agent::submitted">
+      <a href="../Agent/Submitted.html">Submitted</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Timeout" data-name="agent::timeout">
+      <a href="../Agent/Timeout.html">Timeout</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Update" data-name="agent::update(t)">
       <a href="../Agent/Update.html">Update</a>
       
     </li>
   
-  <li class=" " data-id="/Agent/Wait" data-name="agent::wait">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Wait" data-name="agent::wait">
       <a href="../Agent/Wait.html">Wait</a>
       
     </li>
@@ -74,11 +89,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">enum</span> Agent::Result
+  <span class="kind">abstract struct</span> Agent::Result
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Agent/Result.html">Agent::Result</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -89,6 +105,25 @@
 
 
 
+
+
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../Agent/Error.html">Agent::Error</a></li>
+    
+      <li class="other-type"><a href="../Agent/Submitted.html">Agent::Submitted</a></li>
+    
+      <li class="other-type"><a href="../Agent/Timeout.html">Agent::Timeout</a></li>
+    
+  </ul>
 
 
 
@@ -104,70 +139,38 @@
     Defined in:
   </h2>
   
-
-
-
+    
+      <a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L5" target="_blank">
+        agent.cr
+      </a>
+    
+    <br/>
   
-    <h2>
-      <a id="enum-members" class="anchor" href="#enum-members">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Enum Members
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="Timeout">
-        <strong>Timeout</strong> = <code><span class="n">0</span></code>
-      </dt>
-      
-    
-      <dt class="entry-const" id="Submitted">
-        <strong>Submitted</strong> = <code><span class="n">1</span></code>
-      </dt>
-      
-    
-      <dt class="entry-const" id="Error">
-        <strong>Error</strong> = <code><span class="n">2</span></code>
-      </dt>
-      
-    
-  </dl>
-
-
 
 
 
 
 
   <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#error?-instance-method" class="signature"><strong>#error?</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#submitted?-instance-method" class="signature"><strong>#submitted?</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#timeout?-instance-method" class="signature"><strong>#timeout?</strong></a>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
   </ul>
+
+
+
+
 
 
 
@@ -205,74 +208,38 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-
-
-
-
   <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Detail
+    Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="error?-instance-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def <strong>error?</strong>
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#error?-instance-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L5" target="_blank">View source</a>]
+        
       </div>
     </div>
   
-    <div class="entry-detail" id="submitted?-instance-method">
-      <div class="signature">
-        
-        def <strong>submitted?</strong>
 
-        <a class="method-permalink" href="#submitted?-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="timeout?-instance-method">
-      <div class="signature">
-        
-        def <strong>timeout?</strong>
 
-        <a class="method-permalink" href="#timeout?-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
+
+
 
 
 

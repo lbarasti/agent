@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/lbarasti/agent">
-  <title>Agent::Wait - github.com/lbarasti/agent</title>
+  <title>Agent::Timeout - github.com/lbarasti/agent</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -60,7 +60,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/lbarasti/agent/Agent/Timeout" data-name="agent::timeout">
+  <li class=" current" data-id="github.com/lbarasti/agent/Agent/Timeout" data-name="agent::timeout">
       <a href="../Agent/Timeout.html">Timeout</a>
       
     </li>
@@ -70,7 +70,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/lbarasti/agent/Agent/Wait" data-name="agent::wait">
+  <li class=" " data-id="github.com/lbarasti/agent/Agent/Wait" data-name="agent::wait">
       <a href="../Agent/Wait.html">Wait</a>
       
     </li>
@@ -89,12 +89,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Agent::Wait
+  <span class="kind">struct</span> Agent::Timeout
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Agent/Wait.html">Agent::Wait</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Agent/Timeout.html">Agent::Timeout</a></li><li class="superclass"><a href="../Agent/Result.html">Agent::Result</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -122,7 +122,7 @@
   </h2>
   
     
-      <a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L2" target="_blank">
+      <a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L7" target="_blank">
         agent.cr
       </a>
     
@@ -144,7 +144,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(ack:Channel(Nil))-class-method" class="signature"><strong>.new</strong>(ack : Channel(Nil))</a>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
@@ -165,17 +165,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#ack:Channel(Nil)-instance-method" class="signature"><strong>#ack</strong> : Channel(Nil)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with(ack_ack=@ack)-instance-method" class="signature"><strong>#copy_with</strong>(ack _ack = @ack)</a>
+        <a href="#copy_with-instance-method" class="signature"><strong>#copy_with</strong></a>
         
       </li>
     
@@ -186,6 +181,25 @@
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+  <h3>Constructor methods inherited from struct <code><a href="../Agent/Result.html">Agent::Result</a></code></h3>
+  
+  
+    <a href="../Agent/Result.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
   
     
 
@@ -229,18 +243,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(ack:Channel(Nil))-class-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(ack : Channel(Nil))
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#new(ack:Channel(Nil))-class-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -259,20 +273,6 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="ack:Channel(Nil)-instance-method">
-      <div class="signature">
-        
-        def <strong>ack</strong> : Channel(Nil)
-
-        <a class="method-permalink" href="#ack:Channel(Nil)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
@@ -284,23 +284,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(ack_ack=@ack)-instance-method">
+    <div class="entry-detail" id="copy_with-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(ack _ack = @ack)
+        def <strong>copy_with</strong>
 
-        <a class="method-permalink" href="#copy_with(ack_ack=@ack)-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L2" target="_blank">View source</a>]
+          [<a href="https://github.com/lbarasti/agent/blob/6cc2a47b7f881dc83f9169db2c6e6f2f879b3680/src/agent.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
