@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="">
+  <title>Agent(T) - </title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="/Agent" data-name="agent(t)">
+      <a href="Agent.html">Agent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="/Agent/Result" data-name="agent::result">
+      <a href="Agent/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="/Agent/Update" data-name="agent::update(t)">
+      <a href="Agent/Update.html">Update</a>
+      
+    </li>
+  
+  <li class=" " data-id="/Agent/Wait" data-name="agent::wait">
+      <a href="Agent/Wait.html">Wait</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Agent(T)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Agent.html">Agent(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DefaultTimeout">
+        <strong>DefaultTimeout</strong> = <code><span class="n">5</span>.seconds</code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(state:T)-class-method" class="signature"><strong>.new</strong>(state : T)</a>
+        
+          <div class="summary"><p>Creates an Agent wrapping <code>@state</code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#get(max_time=DefaultTimeout):T%7CResult-instance-method" class="signature"><strong>#get</strong>(max_time = <span class="t">DefaultTimeout</span>) : T | Result</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get(max_time=DefaultTimeout,&fn:T-%3EQ):Q%7CResultforallQ-instance-method" class="signature"><strong>#get</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> Q) : Q | Result forall Q</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent and applies the given function to it.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get!(max_time=DefaultTimeout):T-instance-method" class="signature"><strong>#get!</strong>(max_time = <span class="t">DefaultTimeout</span>) : T</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get!(max_time=DefaultTimeout,&fn:T-%3EQ):QforallQ-instance-method" class="signature"><strong>#get!</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> Q) : Q forall Q</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent and applies the given function to it.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_and_update(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):Q%7CResultforallQ-instance-method" class="signature"><strong>#get_and_update</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> ::Tuple(Q, T)) : Q | Result forall Q</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent, updates it and returns the first projection of <code>fn.call(state)</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_and_update!(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):QforallQ-instance-method" class="signature"><strong>#get_and_update!</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> ::Tuple(Q, T)) : Q forall Q</a>
+        
+          <div class="summary"><p>Fetches the state of the Agent, updates it and returns the first projection of <code>fn.call(state)</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update(max_time=DefaultTimeout,&fn:T-%3ET):Result-instance-method" class="signature"><strong>#update</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> T) : Result</a>
+        
+          <div class="summary"><p>Updates the state of the Agent.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(state:T)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(state : T)
+
+        <a class="method-permalink" href="#new(state:T)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Creates an Agent wrapping <code>@state</code>.</p>
+
+<p>Agents are fiber-based, i.e. each Agent runs a fiber and serialises
+access and update requests over a channel. This guarantees thread-safety and
+data consistency within Agent's operations.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="get(max_time=DefaultTimeout):T|Result-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong>(max_time = <span class="t">DefaultTimeout</span>) : T | <a href="Agent/Result.html">Result</a>
+
+        <a class="method-permalink" href="#get(max_time=DefaultTimeout):T%7CResult-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent.</p>
+
+<p>This is equivalent to <code>get(max_time, &id)</code>, where <code>id</code> is the identity function.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get(max_time=DefaultTimeout,&amp;fn:T-&gt;Q):Q|ResultforallQ-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> Q) : Q | <a href="Agent/Result.html">Result</a> forall Q
+
+        <a class="method-permalink" href="#get(max_time=DefaultTimeout,&fn:T-%3EQ):Q%7CResultforallQ-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent and applies the given function to it.</p>
+
+<p>This is equivalent to calling <code><a href="Agent.html#get_and_update(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):Q%7CResultforallQ-instance-method">Agent#get_and_update</a></code>, where <code>fn</code> does not update the current state.
+the current state.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get!(max_time=DefaultTimeout):T-instance-method">
+      <div class="signature">
+        
+        def <strong>get!</strong>(max_time = <span class="t">DefaultTimeout</span>) : T
+
+        <a class="method-permalink" href="#get!(max_time=DefaultTimeout):T-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent.</p>
+
+<p>Analogous <code><a href="Agent.html#get(max_time=DefaultTimeout):T%7CResult-instance-method">Agent#get</a></code>, but an exception is raised in case of timeout.</p>
+
+<p><span class="flag purple">NOTE</span>  the compile-time type of the returned value is <code>T</code>, rather than <code>T | <a href="Agent/Result.html">Agent::Result</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get!(max_time=DefaultTimeout,&amp;fn:T-&gt;Q):QforallQ-instance-method">
+      <div class="signature">
+        
+        def <strong>get!</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> Q) : Q forall Q
+
+        <a class="method-permalink" href="#get!(max_time=DefaultTimeout,&fn:T-%3EQ):QforallQ-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent and applies the given function to it.</p>
+
+<p>Analogous <code><a href="Agent.html#get(max_time=DefaultTimeout):T%7CResult-instance-method">Agent#get</a></code>, but an exception is raised in case of timeout
+or if an exception is raised within the block.</p>
+
+<p><span class="flag purple">NOTE</span>  the compile-time type of the returned value is <code>Q</code>, rather than <code>Q | <a href="Agent/Result.html">Agent::Result</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_and_update(max_time=DefaultTimeout,&amp;fn:T-&gt;::Tuple(Q,T)):Q|ResultforallQ-instance-method">
+      <div class="signature">
+        
+        def <strong>get_and_update</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> ::Tuple(Q, T)) : Q | <a href="Agent/Result.html">Result</a> forall Q
+
+        <a class="method-permalink" href="#get_and_update(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):Q%7CResultforallQ-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent, updates it and returns the first projection of <code>fn.call(state)</code>.</p>
+
+<p>If the <code><a href="Agent.html#get_and_update(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):Q%7CResultforallQ-instance-method">#get_and_update</a></code> request is not handled by the Agent's fiber within
+<code>max_time</code>, then an Agent::Result::Timeout is returned. If an error is raised
+during the execution of the block, then an Agent::Result::Error is returned.
+Otherwise, the transformed state <code>fn.call(state).first</code>, and the state is updated to
+<code>fn.call(state).last</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_and_update!(max_time=DefaultTimeout,&amp;fn:T-&gt;::Tuple(Q,T)):QforallQ-instance-method">
+      <div class="signature">
+        
+        def <strong>get_and_update!</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> ::Tuple(Q, T)) : Q forall Q
+
+        <a class="method-permalink" href="#get_and_update!(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):QforallQ-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Fetches the state of the Agent, updates it and returns the first projection of <code>fn.call(state)</code>.</p>
+
+<p>Analogous <code><a href="Agent.html#get_and_update(max_time=DefaultTimeout,&fn:T-%3E::Tuple(Q,T)):Q%7CResultforallQ-instance-method">Agent#get_and_update</a></code>, but an exception is raised in case of timeout
+or if an exception is raised within the block.</p>
+
+<p><span class="flag purple">NOTE</span>  the compile-time type of the returned value is <code>Q</code>, rather than <code>Q | <a href="Agent/Result.html">Agent::Result</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update(max_time=DefaultTimeout,&amp;fn:T-&gt;T):Result-instance-method">
+      <div class="signature">
+        
+        def <strong>update</strong>(max_time = <span class="t">DefaultTimeout</span>, &fn : T -> T) : <a href="Agent/Result.html">Result</a>
+
+        <a class="method-permalink" href="#update(max_time=DefaultTimeout,&fn:T-%3ET):Result-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Updates the state of the Agent.</p>
+
+<p>Returns <code><a href="Agent/Result.html#Submitted">Agent::Result::Submitted</a></code>, if the update operation was accepted.
+Returns <code><a href="Agent/Result.html#Timeout">Agent::Result::Timeout</a></code>, if a timeout is triggered before the operation
+is accepted by the Agent's fiber.</p>
+
+<p><span class="flag purple">NOTE</span>  <code><a href="Agent.html#update(max_time=DefaultTimeout,&fn:T-%3ET):Result-instance-method">#update</a></code> does not wait for <code>fn</code> to be applied to the Agent's state
+before returning.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

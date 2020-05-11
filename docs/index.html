@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="">
+  <title>README - </title>
+  <script type="text/javascript">
+  CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="/Agent" data-name="agent(t)">
+      <a href="Agent.html">Agent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="/Agent/Result" data-name="agent::result">
+      <a href="Agent/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="/Agent/Update" data-name="agent::update(t)">
+      <a href="Agent/Update.html">Update</a>
+      
+    </li>
+  
+  <li class=" " data-id="/Agent/Wait" data-name="agent::wait">
+      <a href="Agent/Wait.html">Wait</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="agent" class="anchor" href="#agent">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>agent</h1>
+
+<p>An Agent is a wrapper that makes it thread-safe to share object references
+across your application, without having to worry about concurrent access and destructive assignment.</p>
+
+<p>It's an ideal companion for immutable data structures, but promises thread-safe access
+and modifications on mutable objects, too, provided that the user only manipulates state
+within an Agent's methods.</p>
+
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+
+<ul><li>Add the dependency to your <code>shard.yml</code>:</li></ul>
+
+<pre><code class="language-yaml">dependencies:
+  agent:
+    github: lbarasti/agent</code></pre>
+
+<ul><li>Run <code>shards install</code></li></ul>
+
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<p>Let's define an Agent wrapping a hash.</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;agent&quot;</span>
+
+concurrent_hash <span class="o">=</span> <span class="t">Agent</span>.<span class="k">new</span>({<span class="s">&quot;a&quot;</span> => <span class="n">1</span>, <span class="s">&quot;c&quot;</span> => <span class="n">41</span>})</code></pre>
+
+<p>We can now traverse the hash safely with <code>Agent.get</code>.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get { <span class="o">|</span>h<span class="o">|</span> h[<span class="s">&quot;a&quot;</span>] } <span class="c"># =&gt; 1</span></code></pre>
+
+<p>Everything we do within the block passed to <code>Agent#get</code> is guaranteed to be thread-safe and consistent.</p>
+
+<p>To update the hash in a thread-safe fashion we call <code>Agent#update</code>.</p>
+
+<pre><code class="language-crystal">concurrent_hash.update { <span class="o">|</span>h<span class="o">|</span>
+  h[<span class="s">&quot;b&quot;</span>] <span class="o">=</span> <span class="n">12</span>
+  h
+} <span class="c"># =&gt; Agent::Result::Submitted</span></code></pre>
+
+<p>The block passed to <code>Agent#update</code> will run asynchornously, but any calls following
+it are guaranteed to see the updated version of the wrapped object - provided that the update was successfull.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get { <span class="o">|</span>h<span class="o">|</span> h[<span class="s">&quot;b&quot;</span>] } <span class="c"># =&gt; 12</span></code></pre>
+
+<p>If you want synchronously fetch and update the state of the agent, then <code>Agent#get_and_update</code> will serve your purpose.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get_and_update { <span class="o">|</span>h<span class="o">|</span>
+  old_b <span class="o">=</span> h[<span class="s">&quot;b&quot;</span>]
+  h[<span class="s">&quot;b&quot;</span>] <span class="o">=</span> old_b <span class="o">+</span> <span class="n">1</span>
+  {h[<span class="s">&quot;b&quot;</span>] , h}
+} <span class="c"># =&gt; 13</span></code></pre>
+
+<p><code>Agent#get_and_update</code> expects a block of type</p>
+
+<pre><code class="language-crystal"><span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Int32</span>) -> {<span class="t">Q</span>, <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Int32</span>)}</code></pre>
+
+<p>where <code>Q</code> is a generic type and is the type of the returned value. This means you can return
+any transformation of the current Agent's state <em>and</em> alter the state in a single pass.</p>
+
+<h3><a id="error-handling-and-timeouts" class="anchor" href="#error-handling-and-timeouts">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Error handling and timeouts</h3>
+
+<p>Errors are handled within the Agent, and surfaced as <code><a href="Agent/Result.html#Error">Agent::Result::Error</a></code> values.
+For example, if we try to fetch a value for a non existing key, the <code>KeyError</code> exception turns into an <code><a href="Agent/Result.html#Error">Agent::Result::Error</a></code>.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get { <span class="o">|</span>h<span class="o">|</span> h[<span class="s">&quot;non-existing&quot;</span>] } <span class="c"># =&gt; Agent::Result::Error</span></code></pre>
+
+<p>If you'd rather deal with the exception yourself, check out the <code>!</code> variant of Agent's getter methods.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get! { <span class="o">|</span>h<span class="o">|</span> h[<span class="s">&quot;non-existing&quot;</span>] } <span class="c"># raises Exception(&quot;Error&quot;)</span></code></pre>
+
+<p>In order to give responsiveness guarantees to the client's code, Agent's operations support timing out.
+The default timeout is 5 seconds, but you can pass a custom timeout on each operation.</p>
+
+<pre><code class="language-crystal">concurrent_hash.get {
+  sleep <span class="n">3</span>.seconds <span class="c"># simulates a time consuming operation</span>
+}
+
+concurrent_hash.get(max_wait: <span class="n">1</span>.second) { <span class="o">|</span>h<span class="o">|</span>
+  h[<span class="s">&quot;b&quot;</span>]
+} <span class="c"># =&gt; Agent::Result::Timeout</span>
+
+concurrent_hash.get!(max_wait: <span class="n">1</span>.second) { <span class="o">|</span>h<span class="o">|</span>
+  h[<span class="s">&quot;b&quot;</span>]
+} <span class="c"># raises Exception(&quot;Timeout&quot;)</span></code></pre>
+
+<h2><a id="agents-in-multi-threaded-runtime" class="anchor" href="#agents-in-multi-threaded-runtime">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Agents in multi-threaded runtime</h2>
+
+<p>As of Crystal 0.34.0, by default, your code will be compiled to run on a single thread.
+In this scenario, using Agents still makes sense if you access or modify objects from
+different fibers. If that's not the case, then the only perk of adopting Agents is that
+your code will be future proof.</p>
+
+<p>To see how multi-threading and concurrency can break the correctness of your application,
+think about the behaviour of the following code, where we spawn 10 fibers, and each one
+concurrently updates the value of a counter 1024 times.</p>
+
+<pre><code class="language-crystal">done <span class="o">=</span> <span class="t">Channel</span>(<span class="t">Nil</span>).<span class="k">new</span>(<span class="n">10</span>)
+counter <span class="o">=</span> <span class="n">0</span>
+(<span class="n">1</span>..<span class="n">10</span>).each {
+  spawn {
+    (<span class="n">1</span>..<span class="n">1024</span>).each {
+      counter += <span class="n">1</span>
+    }
+    done.send <span class="n">nil</span>
+  }
+}
+<span class="n">10</span>.times { done.receive }
+puts counter <span class="c"># =&gt; ?</span></code></pre>
+
+<p>Or just check out this repository and run</p>
+
+<pre><code>crystal build <span class="o">-</span><span class="t">Dpreview_mt</span> examples<span class="s">/breaking_counter.cr
+CRYSTAL_WORKERS=4 ./</span>breaking_counter</code></pre>
+
+<p>You'll notice unpredictable results in the final count.</p>
+
+<p>We can fix this with an <code><a href="Agent.html">Agent</a></code>.</p>
+
+<pre><code class="language-crystal">done <span class="o">=</span> <span class="t">Channel</span>(<span class="t">Nil</span>).<span class="k">new</span>(<span class="n">10</span>)
+counter <span class="o">=</span> <span class="t">Agent</span>.<span class="k">new</span>(<span class="n">0</span>)
+
+(<span class="n">1</span>..<span class="n">10</span>).each {
+  spawn {
+    (<span class="n">1</span>..<span class="n">1024</span>).each {
+      counter.update { <span class="o">|</span>x<span class="o">|</span> x <span class="o">+</span> <span class="n">1</span> }
+    }
+    done.send <span class="n">nil</span>
+  }
+}
+<span class="n">10</span>.times { done.receive }
+puts counter.get <span class="c"># =&gt; 1024 * 10</span></code></pre>
+
+<p>Now the final value for <code>counter</code> will <em>always</em> equal 10240, no matter the number of runtime threads.</p>
+
+<h2><a id="faq" class="anchor" href="#faq">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>FAQ</h2>
+
+<h3><a id="how-does-this-differ-from-atomict-docshttpscrystal-lang.orgapilatestatomic.html" class="anchor" href="#how-does-this-differ-from-atomict-docshttpscrystal-lang.orgapilatestatomic.html">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>How does this differ from <code>Atomic(T)</code> (<a href="https://crystal-lang.org/api/latest/Atomic.html" target="_blank">docs</a>)?</h3>
+
+<p>Only primitive integer types, reference types or nilable reference types can be used with an Atomic type.  
+On the other hand, you can wrap any type in an <code><a href="Agent.html">Agent</a></code>.</p>
+
+<h3><a id="are-agent-updates-atomic-i.e.-do-either-all-the-instructions-in-a-block-take-effect-or-none-of-it-does" class="anchor" href="#are-agent-updates-atomic-i.e.-do-either-all-the-instructions-in-a-block-take-effect-or-none-of-it-does">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Are Agent updates atomic, i.e. do either all the instructions in a block take effect or none of it does?</h3>
+
+<p>No, atomicity is not guaranteed. In particular, if an exception is raised within a given get / update block,
+then any side-effecting operation preceeding the exception will not be reverted.</p>
+
+<p>Relying on immutable data structures and avoiding side-effects in Agent's get / update operations are
+good mitigations for the lack of atomicity.</p>
+
+<h3><a id="my-code-uses-immutable-data-structures-such-as-these-oneshttpsgithub.comlucaongimmutable.-are-these-not-thread-safe-by-definition" class="anchor" href="#my-code-uses-immutable-data-structures-such-as-these-oneshttpsgithub.comlucaongimmutable.-are-these-not-thread-safe-by-definition">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>My code uses immutable data structures such as <a href="https://github.com/lucaong/immutable" target="_blank">these ones</a>. Are these not thread-safe by definition?</h3>
+
+<p>Immutable data structures are thread-safe in the sense that you can safely access them from different fibers, but they are subject to the so-called <a href="https://en.wikipedia.org/wiki/Concurrency_control#Why_is_concurrency_control_needed?" target="_blank">lost update problem</a>, where changes made by a fiber will not be recorded by another one - think of the case where multiple fibers close over the same variable, and then destructively assign values to such variable, concurrently. </p>
+
+<p>You can dodge the lost-update bullet by making sure that all the updates to your immutable data structure happen in a single fiber, but that's not always possible or desirable. Furthermore, you might still have to implement custom logic to ensure transactionality - think of the scenario where a fiber wants to increment a counter by 1, but first has to fetch the current value of the counter. In a parallel¹ execution, the counter <em>might</em> change between the fetch and the set statement</p>
+
+<p>¹ Things will be fine in a concurrent but not parallel execution, as the fiber will not yield control until after the update.</p>
+
+<h2><a id="development" class="anchor" href="#development">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Development</h2>
+
+<p>Just check out the repository and run <code>crystal spec</code> to run the tests.</p>
+
+<h2><a id="contributing" class="anchor" href="#contributing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributing</h2>
+
+<ol><li>Fork it (&lt;https://github.com/lbarasti/agent/fork>)</li><li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li><li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li><li>Push to the branch (<code>git push origin my-new-feature</code>)</li><li>Create a new Pull Request</li></ol>
+
+<h2><a id="contributors" class="anchor" href="#contributors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributors</h2>
+
+<ul><li><a href="https://github.com/lbarasti" target="_blank">lbarasti</a> - creator and maintainer</li></ul>
+</div>
+</body>
+</html>
