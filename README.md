@@ -1,3 +1,8 @@
+![GitHub release](https://img.shields.io/github/release/lbarasti/agent.svg)
+![Build Status](https://github.com/lbarasti/agent/workflows/Crystal%20spec/badge.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://lbarasti.github.io/agent)
+
 # agent
 
 An Agent is a wrapper that makes it thread-safe to share object references
@@ -41,8 +46,8 @@ concurrent_hash.update { |h|
   h
 } # => Agent::Result::Submitted
 ```
-The block passed to `Agent#update` will run asynchornously, but any calls following
-it are guaranteed to see the updated version of the wrapped object - provided that the update was successfull.
+The block passed to `Agent#update` will run asynchronously, but any calls following
+it are guaranteed to see the updated version of the wrapped object - provided that the update was successful.
 
 ```crystal
 concurrent_hash.get { |h| h["b"] } # => 12
@@ -159,7 +164,7 @@ On the other hand, you can wrap any type in an `Agent`.
 ### Are Agent updates atomic, i.e. do either all the instructions in a block take effect or none of it does?
 
 No, atomicity is not guaranteed. In particular, if an exception is raised within a given get / update block,
-then any side-effecting operation preceeding the exception will not be reverted.
+then any side-effecting operation preceding the exception will not be reverted.
 
 Relying on immutable data structures and avoiding side-effects in Agent's get / update operations are
 good mitigations for the lack of atomicity.
